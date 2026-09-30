@@ -6,7 +6,8 @@
 // ==========================================
 // 1. CONFIGURATION
 // ==========================================
-$UPLOAD_BASE = __DIR__ . '/../Downloads/';
+$REL_BASE = "../Downloads";
+$UPLOAD_BASE = __DIR__ . '/' . $REL_BASE;
 
 // ==========================================
 // 2. HELPER FUNCTIONS
@@ -315,6 +316,7 @@ if ($relativeDir !== '') {
             <!-- Folders -->
             <?php foreach ($folders as $folder): ?>
                 <?php $subDirPath = ($relativeDir ? $relativeDir . '/' : '') . $folder; ?>
+                <?php $folderUrlPath = $REL_BASE . "/" . ($relativeDir ? $relativeDir . '/' : '') . $folder; ?>
                 <tr>
                     <td>
                         📁 <a class="folder-link" href="?current_dir=<?php echo urlencode($subDirPath); ?>">
@@ -335,6 +337,7 @@ if ($relativeDir !== '') {
                             <input type="hidden" name="item_name" value="<?php echo htmlspecialchars($folder); ?>">
                             <button type="submit" class="btn-danger">Delete</button>
                         </form>
+                        <a href="<?php echo htmlspecialchars($folderUrlPath, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener">🡆</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -342,6 +345,7 @@ if ($relativeDir !== '') {
             <!-- Files -->
             <?php foreach ($files as $file): ?>
                 <?php $filePath = $currentDir . '/' . $file; ?>
+                <?php $fileUrlPath = $REL_BASE . "/" . ($relativeDir ? $relativeDir . '/' : '') . $file; ?>
                 <tr>
                     <td>📄 <?php echo htmlspecialchars($file); ?></td>
                     <td>File</td>
@@ -358,6 +362,7 @@ if ($relativeDir !== '') {
                             <input type="hidden" name="item_name" value="<?php echo htmlspecialchars($file); ?>">
                             <button type="submit" class="btn-danger">Delete</button>
                         </form>
+                        <a href="<?php echo htmlspecialchars($fileUrlPath, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener">🡆</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
