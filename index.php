@@ -216,6 +216,7 @@ if ($relativeDir !== '') {
     array_pop($pathParts);
     $parentDir = implode('/', $pathParts);
 }
+$defaultFolderName = bin2hex(random_bytes(16));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -291,7 +292,7 @@ if ($relativeDir !== '') {
             <h3>Create Subfolder</h3>
             <form action="?current_dir=<?php echo urlencode($relativeDir); ?>" method="POST">
                 <input type="hidden" name="action" value="create_folder">
-                <input type="text" name="folder_name" placeholder="Folder name" required style="width: 100%; margin-bottom: 12px; box-sizing: border-box;">
+                <input type="text" name="folder_name" value="<?php echo htmlspecialchars($defaultFolderName, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Folder name" required style="width: 100%; margin-bottom: 12px; box-sizing: border-box;">
                 <button type="submit" class="btn-primary">Create Folder</button>
             </form>
         </div>
